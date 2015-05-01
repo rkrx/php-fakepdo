@@ -12,9 +12,6 @@ class RegistryEventHandler implements EventHandler {
 	 * @return $this
 	 */
 	public function add($eventName, callable $callback, callable $filterFn = null) {
-		/*if(!array_key_exists($eventName, $this->handlers)) {
-			$this->handlers[$eventName] = [];
-		}*/
 		$this->handlers[$eventName] = [
 			'callback' => $callback,
 			'filterFn' => $filterFn
