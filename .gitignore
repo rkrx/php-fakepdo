@@ -2,6 +2,7 @@
 !/src
 !/tests
 !/.gitignore
+!/.travis.yml
 !/composer.json
 !/LICENSE
 !/README.md
