@@ -21,7 +21,7 @@ class FakePDOStatement extends PDOStatement {
 	 * @param PDO $pdo
 	 * @param EventHandler $eventHandler
 	 */
-	function __construct(PDO $pdo, EventHandler $eventHandler = null) {
+	public function __construct(PDO $pdo, EventHandler $eventHandler = null) {
 		$this->pdo = $pdo;
 		$this->setEventHandler($eventHandler);
 		$this->methodNameGenerator = new MethodNameGenerator('PDOStatement');

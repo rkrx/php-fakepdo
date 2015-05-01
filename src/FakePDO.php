@@ -33,12 +33,12 @@ class FakePDO extends PDO {
 
 	/**
 	 * @param string $statement
-	 * @param array $driver_options
+	 * @param array $options
 	 * @return FakePDOStatement
 	 */
-	public function prepare($statement, array $driver_options = array()) {
+	public function prepare($statement, array $options = array()) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
-		return $this->invokeEventHandler($methodName, array($statement, $driver_options), function () {
+		return $this->invokeEventHandler($methodName, array($statement, $options), function () {
 			return new FakePDOStatement($this, $this->getEventHandler());
 		});
 	}
