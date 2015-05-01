@@ -2,17 +2,19 @@
 namespace Kir\FakePDO;
 
 use PDO;
+use Kir\FakePDO\Tools\AttributesTrait;
 use Kir\FakePDO\Tools\MethodNameGenerator;
 use Kir\FakePDO\EventHandlers\EventHandler;
 use Kir\FakePDO\EventHandlers\EventHandlerTrait;
 
 class FakePDO extends PDO {
 	use EventHandlerTrait;
+	use AttributesTrait;
 
-	/** @var bool */
-	private $inTransaction = false;
 	/** @var array */
 	private $attributes = null;
+	/** @var bool */
+	private $inTransaction = false;
 	/** @var MethodNameGenerator */
 	private $methodNameGenerator = null;
 
