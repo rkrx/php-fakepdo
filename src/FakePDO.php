@@ -33,7 +33,7 @@ class FakePDO extends PDO {
 
 	/**
 	 * @param string $statement
-	 * @param array $options
+	 * @param array|null $options
 	 * @return FakePDOStatement
 	 */
 	public function prepare($statement, $options = NULL) {
@@ -78,7 +78,7 @@ class FakePDO extends PDO {
 	/**
 	 * @return bool
 	 */
-	public function rollBack() {
+	public function rollback() {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			$inTransaction = $this->inTransaction();

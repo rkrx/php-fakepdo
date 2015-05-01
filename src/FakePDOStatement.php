@@ -28,12 +28,12 @@ class FakePDOStatement extends PDOStatement {
 	}
 
 	/**
-	 * @param array $input_parameters
+	 * @param array|null $bound_input_params
 	 * @return bool
 	 */
-	public function execute(array $input_parameters = null) {
+	public function execute($bound_input_params = NULL) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
-		return $this->invokeEventHandler($methodName, array($input_parameters), function () {
+		return $this->invokeEventHandler($methodName, array($bound_input_params), function () {
 			return true;
 		});
 	}
