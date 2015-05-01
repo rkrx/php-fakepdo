@@ -43,7 +43,6 @@ class FakePDO extends PDO {
 		});
 	}
 
-
 	/**
 	 * @return bool
 	 */
