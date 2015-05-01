@@ -2,21 +2,19 @@
 namespace Kir\FakePDO;
 
 use PDO;
-use Kir\FakePDO\Tools\AttributesTrait;
 use Kir\FakePDO\Tools\MethodNameGenerator;
 use Kir\FakePDO\EventHandlers\EventHandler;
 use Kir\FakePDO\EventHandlers\EventHandlerTrait;
 
 class FakePDO extends PDO {
 	use EventHandlerTrait;
-	use AttributesTrait;
 
 	/** @var array */
 	private $attributes = null;
 	/** @var bool */
 	private $inTransaction = false;
 	/** @var MethodNameGenerator */
-	private $methodNameGenerator = null;
+	private $methodNameGeneratorA = null;
 
 	/**
 	 * @return array
@@ -29,7 +27,7 @@ class FakePDO extends PDO {
 	 * @param EventHandler $eventHandler
 	 */
 	public function __construct(EventHandler $eventHandler = null) {
-		$this->methodNameGenerator = new MethodNameGenerator('PDO');
+		$this->methodNameGeneratorA = new MethodNameGenerator('PDO');
 		$this->setEventHandler($eventHandler);
 	}
 
@@ -39,7 +37,7 @@ class FakePDO extends PDO {
 	 * @return FakePDOStatement
 	 */
 	public function prepare($statement, $options = NULL) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement, $options), function () {
 			return new FakePDOStatement($this->getEventHandler());
 		});
@@ -49,7 +47,7 @@ class FakePDO extends PDO {
 	 * @return bool
 	 */
 	public function beginTransaction() {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			$inTransaction = $this->inTransaction();
 			if($inTransaction) {
@@ -65,7 +63,7 @@ class FakePDO extends PDO {
 	 * @return bool
 	 */
 	public function commit() {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			$inTransaction = $this->inTransaction();
 			if($inTransaction) {
@@ -81,7 +79,7 @@ class FakePDO extends PDO {
 	 * @return bool
 	 */
 	public function rollback() {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			$inTransaction = $this->inTransaction();
 			if($inTransaction) {
@@ -97,7 +95,7 @@ class FakePDO extends PDO {
 	 * @return bool
 	 */
 	public function inTransaction() {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			return $this->inTransaction;
 		});
@@ -108,7 +106,7 @@ class FakePDO extends PDO {
 	 * @return mixed
 	 */
 	public function getAttribute($attribute) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($attribute), function ($attribute) {
 			$attribute = json_encode($attribute);
 			if(array_key_exists($attribute, $this->attributes)) {
@@ -124,7 +122,7 @@ class FakePDO extends PDO {
 	 * @return bool
 	 */
 	public function setAttribute($attribute, $value) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($attribute, $value), function ($attribute, $value) {
 			$attribute = json_encode($attribute);
 			$this->attributes[$attribute] = $value;
@@ -137,7 +135,7 @@ class FakePDO extends PDO {
 	 * @return int
 	 */
 	public function exec($statement) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement), function () {
 			return 1;
 		});
@@ -148,7 +146,7 @@ class FakePDO extends PDO {
 	 * @return FakePDOStatement
 	 */
 	public function query($statement) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement), function () {
 			return new FakePDOStatement($this->getEventHandler());
 		});
@@ -159,7 +157,7 @@ class FakePDO extends PDO {
 	 * @return string|null
 	 */
 	public function lastInsertId($name = null) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($name), function () {
 			return null;
 		});
@@ -169,7 +167,7 @@ class FakePDO extends PDO {
 	 * @return mixed
 	 */
 	public function errorCode() {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			return null;
 		});
@@ -179,7 +177,7 @@ class FakePDO extends PDO {
 	 * @return mixed
 	 */
 	public function errorInfo() {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			return [0, 0, 0];
 		});
@@ -191,7 +189,7 @@ class FakePDO extends PDO {
 	 * @return string|void
 	 */
 	public function quote($string, $parameter_type = PDO::PARAM_STR) {
-		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
+		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($string, $parameter_type), function ($string) {
 			return $string;
 		});
