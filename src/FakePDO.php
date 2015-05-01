@@ -36,7 +36,7 @@ class FakePDO extends PDO {
 	 * @param array $options
 	 * @return FakePDOStatement
 	 */
-	public function prepare($statement, array $options = array()) {
+	public function prepare($statement, $options = NULL) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement, $options), function () {
 			return new FakePDOStatement($this, $this->getEventHandler());
