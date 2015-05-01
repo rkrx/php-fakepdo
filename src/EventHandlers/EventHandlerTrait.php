@@ -2,18 +2,18 @@
 namespace Kir\FakePDO\EventHandlers;
 
 trait EventHandlerTrait {
-	/** @var EventHandler */
+	/** @var EventHandler|null */
 	private $eventHandler;
 
 	/**
-	 * @return EventHandler
+	 * @return EventHandler|null
 	 */
 	protected function getEventHandler() {
 		return $this->eventHandler;
 	}
 
 	/**
-	 * @param EventHandler $eventHandler
+	 * @param EventHandler|null $eventHandler
 	 * @return $this
 	 */
 	protected function setEventHandler($eventHandler) {
