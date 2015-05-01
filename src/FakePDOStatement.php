@@ -116,12 +116,12 @@ class FakePDOStatement extends PDOStatement {
 	}
 
 	/**
-	 * @param int $fetch_style
-	 * @param mixed $fetch_argument
-	 * @param array $ctor_args
+	 * @param mixed|null $how
+	 * @param mixed|null $class_name
+	 * @param array|null $ctor_args
 	 * @return array
 	 */
-	public function fetchAll($fetch_style = null, $fetch_argument = null, array $ctor_args = array()) {
+	public function fetchAll($how = NULL, $class_name = NULL, $ctor_args = NULL) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			return [];
