@@ -10,19 +10,15 @@ use PDOStatement;
 class FakePDOStatement extends PDOStatement {
 	use EventHandlerTrait;
 
-	/** @var PDO */
-	private $pdo;
 	/** @var array */
 	private $attributes = null;
 	/** @var MethodNameGenerator */
 	private $methodNameGenerator = null;
 
 	/**
-	 * @param PDO $pdo
 	 * @param EventHandler $eventHandler
 	 */
-	public function __construct(PDO $pdo, EventHandler $eventHandler = null) {
-		$this->pdo = $pdo;
+	public function __construct(EventHandler $eventHandler = null) {
 		$this->setEventHandler($eventHandler);
 		$this->methodNameGenerator = new MethodNameGenerator('PDOStatement');
 	}

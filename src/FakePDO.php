@@ -39,7 +39,7 @@ class FakePDO extends PDO {
 	public function prepare($statement, $options = NULL) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement, $options), function () {
-			return new FakePDOStatement($this, $this->getEventHandler());
+			return new FakePDOStatement($this->getEventHandler());
 		});
 	}
 
@@ -148,7 +148,7 @@ class FakePDO extends PDO {
 	public function query($statement) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement), function () {
-			return new FakePDOStatement($this, $this->getEventHandler());
+			return new FakePDOStatement($this->getEventHandler());
 		});
 	}
 
