@@ -1,0 +1,27 @@
+{
+	"name": "rkr/fakepdo",
+	"description": "A fake PDO for testing-purposes",
+	"type": "library",
+	"license": "MIT",
+	"authors": [{
+		"name": "Ron Kirschler",
+		"email": "ron.kirschler@gmail.com"
+	}],
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">= 5.4"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~3.7@stable"
+	},
+	"autoload": {
+		"psr-4": {
+			"Kir\\FakePDO\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kir\\FakePDO\\": ["src/", "tests/"]
+		}
+	}
+}
