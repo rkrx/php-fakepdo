@@ -33,7 +33,7 @@ trait EventHandlerTrait {
 			return $eventHandler->invoke($eventName, $params, $this);
 		}
 		if($defaultCallback !== null) {
-			return call_user_func($defaultCallback);
+			return call_user_func_array($defaultCallback, $params);
 		}
 		return null;
 	}

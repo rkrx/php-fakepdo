@@ -10,7 +10,7 @@ class FakePDO extends PDO {
 	use EventHandlerTrait;
 
 	/** @var array */
-	private $attributes = null;
+	private $attributes = [];
 	/** @var bool */
 	private $inTransaction = false;
 	/** @var MethodNameGenerator */
