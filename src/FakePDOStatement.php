@@ -117,7 +117,7 @@ class FakePDOStatement extends PDOStatement {
 	 * @param array|null $ctor_args
 	 * @return array
 	 */
-	public function fetchAll($how = NULL, $class_name = NULL, $ctor_args = NULL) {
+	public function fetchAll(int $mode = PDO::FETCH_BOTH, mixed ...$args) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array(), function () {
 			return [];
