@@ -145,7 +145,7 @@ class FakePDO extends PDO {
 	 * @param string $statement
 	 * @return FakePDOStatement
 	 */
-	public function query($statement) {
+	public function query($statement, ?int $fetchMode = null, ...$fetchModeArgs) {
 		$methodName = $this->methodNameGeneratorA->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($statement), function () {
 			return new FakePDOStatement($this->getEventHandler());
