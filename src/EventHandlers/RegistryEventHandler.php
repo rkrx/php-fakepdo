@@ -25,7 +25,7 @@ class RegistryEventHandler implements EventHandler {
 	 * @param object $callee
 	 * @return mixed
 	 */
-	public function invoke($eventName, array $params = [], $callee) {
+	public function invoke($eventName, array $params, $callee) {
 		if(!$this->isResponsible($eventName, $params, $callee)) {
 			return null;
 		}
