@@ -211,7 +211,7 @@ class FakePDOStatement extends PDOStatement {
 	 * @param array|null $params
 	 * @return bool
 	 */
-	public function setFetchMode($mode, $params = NULL) {
+	public function setFetchMode(int $mode, ...$args) {
 		$methodName = $this->methodNameGenerator->getQualifiedMethodName(__FUNCTION__);
 		return $this->invokeEventHandler($methodName, array($mode), function () {
 			return true;
